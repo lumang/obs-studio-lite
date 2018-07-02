@@ -553,6 +553,8 @@ void obs_source_addref(obs_source_t *source)
 
 void obs_source_release(obs_source_t *source)
 {
+	obs_weak_source_t *control = source->control;
+
 	if (!obs) {
 		blog(LOG_WARNING, "Tried to release a source when the OBS "
 		                  "core is shut down!");
@@ -562,7 +564,6 @@ void obs_source_release(obs_source_t *source)
 	if (!source)
 		return;
 
-	obs_weak_source_t *control = source->control;
 	if (obs_ref_release(&control->ref)) {
 		obs_source_destroy(source);
 		obs_weak_source_release(control);
@@ -596,10 +597,11 @@ obs_source_t *obs_source_get_ref(obs_source_t *source)
 
 obs_weak_source_t *obs_source_get_weak_source(obs_source_t *source)
 {
+	obs_weak_source_t *weak = source->control;
+
 	if (!source)
 		return NULL;
 
-	obs_weak_source_t *weak = source->control;
 	obs_weak_source_addref(weak);
 	return weak;
 }

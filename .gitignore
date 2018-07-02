@@ -16,6 +16,7 @@
 /debug32/
 /debug64/
 /builds/
+/additional_install_files/
 *.o.d
 *.ninja
 .ninja*

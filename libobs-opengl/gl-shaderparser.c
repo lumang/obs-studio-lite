@@ -336,7 +336,7 @@ static bool gl_write_texture_code(struct gl_shader_parser *glsp,
 	if (!cf_next_token(cfp))    return false;
 	if (!cf_token_is(cfp, ".")) return false;
 	if (!cf_next_token(cfp))    return false;
-
+	;
 	const char *function_end = ")";
 
 	if (cf_token_is(cfp, "Sample"))
